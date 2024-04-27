@@ -10,7 +10,10 @@ layout {
         }
     }
     tab focus=true {
-      pane focus=true edit="package.json" borderless=true
+      // pane focus=true edit="package.json" borderless=true
+      pane focus=true command="nvim" borderless=true {
+        args "package.json"
+      }
       pane split_direction="vertical" size="35%" {
         pane command="yarn" {
             args "start"
@@ -27,13 +30,8 @@ layout {
 }
 keybinds {
     shared {
-      bind "Ctrl p" { ToggleTab; }
-      bind "Alt g" {
-            Run "gitui" {
-                floating true
-                close_on_exit true
-            }
-            SwitchToMode "Normal";
-        }
+      bind "Alt ]" { ToggleTab; }
+      bind "Alt [" { ToggleFocusFullscreen; }
+
     }
 }
