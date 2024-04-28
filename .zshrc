@@ -6,6 +6,12 @@ if [ -d /usr/local/bin ]; then
   export PATH=$PATH:/usr/local/bin
 fi
 
+if [ -z "${HISTFILE}" ]; then
+  export HISTFILE=$HOME/.zsh_history
+  export HISTSIZE=10000
+  export SAVEHIST=10000
+fi
+
 export EDITOR=nvim
 #export PYENV_ROOT="$HOME/.pyenv"
 #export PATH="$PYENV_ROOT/bin:$PATH"
