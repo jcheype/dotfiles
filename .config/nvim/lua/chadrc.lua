@@ -15,4 +15,5 @@ M.ui = {
 
 vim.g.vscode_snippets_path= "~/.config/nvim/my_snippets"
 
+
 return M

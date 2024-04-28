@@ -22,6 +22,11 @@
     unzip
     direnv
     gcc
+    yarn
+    nodePackages_latest.typescript-language-server
+    tailwindcss-language-server
+    biome
+    zellij
     # Some common stuff that people expect to have
     #diffutils
     #findutils
