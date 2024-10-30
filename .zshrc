@@ -19,9 +19,9 @@ export EDITOR=nvim
 #eval "$(pyenv init -)"
 #eval "$(pyenv virtualenv-init -)"
 
-export ZSH="$HOME/.oh-my-zsh"
-plugins=(git starship zoxide direnv zsh-autosuggestions zsh-syntax-highlighting)
-source $ZSH/oh-my-zsh.sh
+#export ZSH="$HOME/.oh-my-zsh"
+#plugins=(git starship zoxide direnv zsh-autosuggestions zsh-syntax-highlighting)
+#source $ZSH/oh-my-zsh.sh
 
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
