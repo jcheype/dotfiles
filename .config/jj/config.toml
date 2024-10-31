@@ -1,0 +1,9 @@
+[user]
+name = "Julien Cheype"
+email = "cheype@gmail.com"
+
+[ui]
+default-command = "log"
+
+[revsets]
+log = "..@"
