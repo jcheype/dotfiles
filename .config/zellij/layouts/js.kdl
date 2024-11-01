@@ -15,17 +15,14 @@ layout {
         args "package.json"
       }
       pane split_direction="vertical" size="35%" {
-        pane command="yarn" {
+        pane command="yarn" start_suspended=true{
             args "start"
         }
         pane 
       }
     }
     tab {
-      pane split_direction="vertical" {
-        pane command="gitui"
-        pane
-      }
+        pane borderless=true
     }
 }
 keybinds {
