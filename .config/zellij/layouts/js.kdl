@@ -1,0 +1,39 @@
+layout {
+     default_tab_template {
+        // the default zellij tab-bar and status bar plugins
+        // pane size=1 borderless=true {
+        //    plugin location="zellij:tab-bar"
+        //}
+        children
+        pane size=2 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
+    tab focus=true {
+      pane focus=true edit="package.json" borderless=true
+      pane split_direction="vertical" size="35%" {
+        pane command="yarn" {
+            args "start"
+        }
+        pane 
+      }
+    }
+    tab {
+      pane split_direction="vertical" {
+        pane command="gitui"
+        pane
+      }
+    }
+}
+keybinds {
+    shared {
+      bind "Ctrl p" { ToggleTab; }
+      bind "Alt g" {
+            Run "gitui" {
+                floating true
+                close_on_exit true
+            }
+            SwitchToMode "Normal";
+        }
+    }
+}
