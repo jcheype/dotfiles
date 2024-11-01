@@ -1,0 +1,18 @@
+{
+	"React component": {
+		"prefix": "rcomp",
+		"body": [
+			"import { type FunctionComponent } from \"react\";",
+			"",
+			"type ${TM_FILENAME_BASE}Props = {",
+			"${1:properties}",
+			"};",
+			"",
+			"export const ${TM_FILENAME_BASE} : FunctionComponent<${TM_FILENAME_BASE}Props> = (props): JSX.Element => {",
+			"  $0",
+			"  return <></>;",
+			"};"
+		],
+		"description": "React component"
+	}
+}
