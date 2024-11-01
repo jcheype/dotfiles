@@ -1,0 +1,31 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = Julien Cheype
+	email = cheype@gmail.com
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[maintenance]
+	repo = /Users/julien/Repos/znap
+	repo = /Users/julien/Repos/marlonrichert/zsh-autocomplete
+[diff]
+        tool = difftastic
+#        external = difft
+[difftool]
+        prompt = false
+
+[difftool "difftastic"]
+        cmd = difft "$LOCAL" "$REMOTE"
+
+[pager]
+        difftool = true
+[alias]
+        dft = difftool
+        dlog = "!f() { : git log ; GIT_EXTERNAL_DIFF=difft git log -p --ext-diff $@; }; f"
+
+[init]
+	defaultBranch = main
