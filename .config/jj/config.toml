@@ -3,3 +3,7 @@ default-command = "log"
 
 [revsets]
 log = "::@"
+
+[user]
+name = "Julien Cheype"
+email = "cheype@gmail.com"
