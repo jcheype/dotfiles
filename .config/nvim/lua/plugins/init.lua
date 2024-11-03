@@ -28,6 +28,10 @@ return {
     version = '^4', -- Recommended
     lazy = false, -- This plugin is already lazy
   },   
+  {
+    "christoomey/vim-tmux-navigator",
+    lazy = false,
+  }
   -- {
   -- 	"nvim-treesitter/nvim-treesitter",
   -- 	opts = {

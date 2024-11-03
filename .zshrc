@@ -88,7 +88,7 @@ export BAT_THEME=tokyonight_night
 
 # ---- Eza (better ls) -----
 
-alias l="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
+alias l="eza --color=always --long --git --icons=always"
 
 # ---- Zoxide (better cd) ----
 eval "$(zoxide init zsh)"
@@ -98,18 +98,11 @@ alias cd="z"
 
 alias jjsync="jj git fetch && jj rebase -d"
 
-
-
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
-
-
+export PATH="$PATH:$HOME/.config/tmux/plugins/tmuxifier/bin"
+eval "$(tmuxifier init -)"
 
 export PATH="$PATH:$HOME/bin:$HOME/.cargo/bin"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/etc/bash_completion.d/nvm" ] && \. "$NVM_DIR/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
-source /usr/share/nvm/init-nvm.sh
