@@ -88,7 +88,7 @@ export BAT_THEME=tokyonight_night
 
 # ---- Eza (better ls) -----
 
-alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
+alias l="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
 
 # ---- Zoxide (better cd) ----
 eval "$(zoxide init zsh)"
@@ -96,6 +96,7 @@ eval "$(zoxide init zsh)"
 alias cd="z"
 
 
+alias jjsync="jj git fetch && jj rebase -d"
 
 
 
