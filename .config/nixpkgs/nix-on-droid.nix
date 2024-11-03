@@ -13,7 +13,7 @@ config = config.nixpkgs.config;
   # Simply install just the packages
   environment.packages = with pkgs; [
     # User-facing stuff that you really really want to have
-    coreutils
+    gawk
     unstable.neovim # or some other editor, e.g. nano or neovim
     zsh
     zoxide
