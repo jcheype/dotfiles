@@ -1,5 +1,5 @@
 layout {
-     default_tab_template {
+     default_tab_template hide_floating_panes=true{
         // the default zellij tab-bar and status bar plugins
         pane size=1 borderless=true {
             plugin location="zellij:tab-bar"
@@ -10,7 +10,7 @@ layout {
         }
     }
     tab focus=true {
-      pane focus=true edit="src/main.rs"
+      pane focus=true edit="src/main.rs" borderless=true
       pane split_direction="vertical" size="20%" {
         pane command="cargo" {
             args "run"
@@ -22,20 +22,13 @@ layout {
     }
     tab {
       pane split_direction="vertical" {
-        pane command="gitui"
         pane
       }
     }
 }
 keybinds {
     shared {
-      bind "Ctrl p" { ToggleTab; }
-      bind "Alt g" {
-            Run "gitui" {
-                floating true
-                close_on_exit true
-            }
-            SwitchToMode "Normal";
-        }
+//      bind "Ctrl p" { ToggleTab; }
+      bind "Ctrl f" { ToggleFocusFullscreen; }
     }
 }
