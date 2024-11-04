@@ -96,13 +96,28 @@ eval "$(zoxide init zsh)"
 alias cd="z"
 
 
-alias jjsync="jj git fetch && jj rebase -d"
+jjsync(){
+	#set -x
+	jj git fetch && jj rebase -s "all:roots($1..@)" -d $1
+	#set +x
+}
+
+jjpa() {
+	#set -x
+	jj git push -r "mine() & bookmarks() & $1::"
+	#set +x
+}
+jjspa(){
+  jjsync $1 && jjpa $1
+}
+
 
 export PATH="$PATH:$HOME/.config/tmux/plugins/tmuxifier/bin"
 eval "$(tmuxifier init -)"
 
 export PATH="$PATH:$HOME/bin:$HOME/.cargo/bin"
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/etc/bash_completion.d/nvm" ] && \. "$NVM_DIR/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+#[ -s "$NVM_DIR/etc/bash_completion.d/nvm" ] && \. "$NVM_DIR/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
+eval "$(`which mise` activate zsh)"
