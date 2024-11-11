@@ -7,19 +7,23 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      /etc/nixos/hardware-configuration.nix
     ];
+
+  nixpkgs.config = {
+    packageOverrides = pkgs: {
+      unstable = import <nixpkgs-unstable> {
+        config = config.nixpkgs.config;
+      };
+    };
+  };
 
   # Bootloader.
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
 
-  nix.settings.allowed-users = [
-	"julien"
-  ];
-
-  networking.hostName = "nixos"; # Define your hostname.
+ networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -69,10 +73,49 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
-    neovim
-    openssh
-    git
+    
+    unstable.neovim # or some other editor, e.g. nano or neovim
+    zsh
+    zoxide
     stow
+    starship
+    eza
+    bat
+    git
+    fzf
+    fd
+    gitui
+    ripgrep
+    openssh
+    wget
+    curl
+    direnv
+    gcc
+    yarn
+    tailwindcss-language-server
+    biome
+    zellij
+    rustup
+    # Some common stuff that people expect to have
+    procps
+    killall
+    diffutils
+    findutils
+    utillinux
+    tzdata
+    hostname
+    man
+    gnugrep
+    gnupg
+    gnused
+    gnutar
+    bzip2
+    gzip
+    xz
+    zip
+    unzip
+    unstable.jujutsu
+    tmux
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
