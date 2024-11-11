@@ -10,5 +10,11 @@ config.window_padding = {
   top = '0px',
   bottom = '0px',
 }
+
+config.font = wezterm.font('JetBrains Mono')
+config.font_size = 14
+
+config.window_decorations = "RESIZE"
+
 return config
 
