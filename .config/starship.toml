@@ -9,6 +9,7 @@ $directory\
 [](fg:color_yellow bg:color_aqua)\
 $git_branch\
 $git_status\
+${custom.jj}\
 [](fg:color_aqua bg:color_blue)\
 $c\
 $rust\
@@ -167,3 +168,29 @@ vimcmd_symbol = '[](bold fg:color_green)'
 vimcmd_replace_one_symbol = '[](bold fg:color_purple)'
 vimcmd_replace_symbol = '[](bold fg:color_purple)'
 vimcmd_visual_symbol = '[](bold fg:color_yellow)'
+
+[custom.jj]
+command = '''
+jj log -r 'bookmarks()' -n1 --ignore-working-copy --no-graph --color never  -T '
+  separate(" ",
+    bookmarks.map(|x| if(
+        x.name().substr(0, 10).starts_with(x.name()),
+        x.name().substr(0, 10),
+        x.name().substr(0, 9) ++ "…")
+      ).join(" "),
+    tags.map(|x| if(
+        x.name().substr(0, 10).starts_with(x.name()),
+        x.name().substr(0, 10),
+        x.name().substr(0, 9) ++ "…")
+      ).join(" "),
+    if(conflict, "conflict"),
+    if(divergent, "divergent"),
+    if(hidden, "hidden"),
+  )
+'
+'''
+detect_folders = [".jj"]
+symbol = ""
+format = '[[ $symbol $output ](fg:color_fg0 bg:color_aqua)]($style)'
+
+
