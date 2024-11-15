@@ -11,12 +11,25 @@
 
   outputs = { self, nixpkgs, home-manager, ... }: {
     defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
+    defaultPackage.aarch64-darwin = home-manager.defaultPackage.aarch64-darwin;
     homeConfigurations = {
+            "julien@Juliens-MacBook-Pro.local" = home-manager.lib.homeManagerConfiguration {
+                # Note: I am sure this could be done better with flake-utils or something
+                pkgs = import nixpkgs { system =  "aarch64-darwin"; };
+
+                modules = [
+                  ./darwin.nix
+                  ./home.nix
+                ]; # Defined later
+            };
             "julien" = home-manager.lib.homeManagerConfiguration {
                 # Note: I am sure this could be done better with flake-utils or something
                 pkgs = import nixpkgs { system = "x86_64-linux"; };
 
-                modules = [ ./home.nix ]; # Defined later
+                modules = [
+                  ./linux.nix
+                  ./home.nix
+                ]; # Defined later
             };
         };
   };
