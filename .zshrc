@@ -121,3 +121,5 @@ export PATH="$PATH:$HOME/bin:$HOME/.cargo/bin"
 #[ -s "$NVM_DIR/etc/bash_completion.d/nvm" ] && \. "$NVM_DIR/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 eval "$(`which mise` activate zsh)"
+
+export JJ_CONFIG=$HOME/.config/jj/config.toml
