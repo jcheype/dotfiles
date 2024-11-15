@@ -9,8 +9,9 @@ $directory\
 [](fg:color_yellow bg:color_aqua)\
 $git_branch\
 $git_status\
+[](fg:color_aqua bg:color_purple)\
 ${custom.jj}\
-[](fg:color_aqua bg:color_blue)\
+[](fg:color_purple bg:color_blue)\
 $c\
 $rust\
 $golang\
@@ -191,6 +192,6 @@ jj log -r 'bookmarks()' -n1 --ignore-working-copy --no-graph --color never  -T '
 '''
 detect_folders = [".jj"]
 symbol = ""
-format = '[[ $symbol $output ](fg:color_fg0 bg:color_aqua)]($style)'
+format = '[[ $symbol $output ](fg:color_fg0 bg:color_purple)]($style)'
 
 
