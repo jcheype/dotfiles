@@ -172,7 +172,7 @@ vimcmd_visual_symbol = '[](bold fg:color_yellow)'
 
 [custom.jj]
 command = '''
-jj log -r 'bookmarks()' -n1 --ignore-working-copy --no-graph --color never  -T '
+jj log -r '::@' --ignore-working-copy --no-graph --color never  -T '
   separate(" ",
     bookmarks.map(|x| if(
         x.name().substr(0, 10).starts_with(x.name()),
