@@ -43,6 +43,7 @@
       pkgs.mise
       pkgs.tmux
       pkgs.direnv
+      pkgs.lazydocker
 
       pkgs.gcc
       pkgs.gnumake
