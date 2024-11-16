@@ -1,5 +1,5 @@
-.jj
+./.jj
 .git
 nixos
 arch
-home-manager
+./home-manager
