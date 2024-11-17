@@ -37,13 +37,13 @@ vim.schedule(function()
 end)
 
 for _, method in ipairs({ 'textDocument/diagnostic', 'workspace/diagnostic' }) do
-    local default_diagnostic_handler = vim.lsp.handlers[method]
-    vim.lsp.handlers[method] = function(err, result, context, config)
-        if err ~= nil and err.code == -32802 then
-            return
-        end
-        return default_diagnostic_handler(err, result, context, config)
+  local default_diagnostic_handler = vim.lsp.handlers[method]
+  vim.lsp.handlers[method] = function(err, result, context, config)
+    if err ~= nil and err.code == -32802 then
+      return
     end
+    return default_diagnostic_handler(err, result, context, config)
+  end
 end
 
 vim.opt.scrolloff = 5
@@ -57,8 +57,31 @@ vim.api.nvim_create_autocmd("LspAttach", {
       buffer = args.buf,
       callback = function()
         -- 4 + 5
-        vim.lsp.buf.format {async = false, id = args.data.client_id }
+        vim.lsp.buf.format { async = false, id = args.data.client_id }
       end,
     })
   end
+})
+
+
+require("lspconfig").nixd.setup({
+  cmd = { "nixd" },
+  settings = {
+    nixd = {
+      nixpkgs = {
+        expr = "import <nixpkgs> { }",
+      },
+      formatting = {
+        command = { "alejandra" }, -- or nixfmt or nixpkgs-fmt
+      },
+      -- options = {
+      --   nixos = {
+      --       expr = '(builtins.getFlake "/PATH/TO/FLAKE").nixosConfigurations.CONFIGNAME.options',
+      --   },
+      --   home_manager = {
+      --       expr = '(builtins.getFlake "/PATH/TO/FLAKE").homeConfigurations.CONFIGNAME.options',
+      --   },
+      -- },
+    },
+  },
 })

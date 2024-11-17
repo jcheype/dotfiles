@@ -18,7 +18,6 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
 
-
   home.packages = [
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
@@ -28,31 +27,32 @@
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
-      pkgs.neovim
-      pkgs.git
-      pkgs.jujutsu
-      pkgs.zsh
-      pkgs.zoxide
-      pkgs.stow
-      pkgs.ripgrep
-      pkgs.starship
-      pkgs.fzf
-      pkgs.eza
-      pkgs.bat
-      pkgs.fd
-      pkgs.mise
-      pkgs.tmux
-      pkgs.direnv
-      pkgs.lazydocker
+    pkgs.neovim
+    pkgs.git
+    pkgs.jujutsu
+    pkgs.zsh
+    pkgs.zoxide
+    pkgs.stow
+    pkgs.ripgrep
+    pkgs.starship
+    pkgs.fzf
+    pkgs.eza
+    pkgs.bat
+    pkgs.fd
+    pkgs.mise
+    pkgs.tmux
+    pkgs.direnv
+    pkgs.lazydocker
+    pkgs.nixfmt-rfc-style
+    pkgs.nixd
 
-      pkgs.gcc
-      pkgs.gnumake
-      pkgs.lua-language-server
-      pkgs.typescript-language-server
+    pkgs.gcc
+    pkgs.gnumake
+    pkgs.lua-language-server
+    pkgs.typescript-language-server
 
-      pkgs.google-chrome
-      pkgs.bruno
-
+    pkgs.google-chrome
+    pkgs.bruno
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
