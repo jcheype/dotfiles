@@ -19,7 +19,7 @@
     homeConfigurations = {
             "julien@Juliens-MacBook-Pro.local" = home-manager.lib.homeManagerConfiguration {
                 # Note: I am sure this could be done better with flake-utils or something
-                pkgs = import nixpkgs { system =  "aarch64-darwin"; };
+                pkgs = import nixpkgs { system =  "aarch64-darwin"; config.allowUnfree = true; };
 
                 modules = [
                   ./darwin.nix
@@ -29,7 +29,7 @@
             "julien" = home-manager.lib.homeManagerConfiguration {
                 # Note: I am sure this could be done better with flake-utils or something
                 extraSpecialArgs = { inherit inputs; };
-                pkgs = import nixpkgs { system = "x86_64-linux"; };
+                pkgs = import nixpkgs { system = "x86_64-linux"; config.allowUnfree = true; };
 
                 modules = [
                   ./linux.nix
