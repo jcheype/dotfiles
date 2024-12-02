@@ -46,6 +46,8 @@
     pkgs.nixfmt-rfc-style
     pkgs.nixd
     pkgs.btop
+    pkgs.yazi
+    pkgs.atuin
 
     pkgs.gcc
     pkgs.gnumake

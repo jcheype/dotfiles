@@ -10,6 +10,8 @@
     /etc/nixos/hardware-configuration.nix
   ];
 
+  nix.package = pkgs.lix;
+
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"

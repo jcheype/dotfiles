@@ -105,7 +105,7 @@ jjsync(){
 
 jjpa() {
 	#set -x
-	jj git push -r "mine() & bookmarks() & $1::"
+	jj git push -r "mine() & bookmarks() & $1::" --allow-new
 	#set +x
 }
 jjspa(){
@@ -124,3 +124,8 @@ export PATH="$PATH:$HOME/bin:$HOME/.cargo/bin"
 eval "$(`which mise` activate zsh)"
 
 export JJ_CONFIG=$HOME/.config/jj/config.toml
+
+export XDG_DATA_DIRS="/opt/homebrew/share:$XDG_DATA_DIRS"
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+
+eval "$(atuin init zsh --disable-up-arrow)"
