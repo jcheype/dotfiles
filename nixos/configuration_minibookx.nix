@@ -7,7 +7,7 @@
 {
   imports = [
     # Include the results of the hardware scan.
-    /etc/nixos/hardware-configuration.nix
+    ./hardware-configuration.nix
   ];
 
   nix.settings.experimental-features = [
@@ -114,6 +114,7 @@
     git
     home-manager
     zsh
+    gnomeExtensions.screen-rotate
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
