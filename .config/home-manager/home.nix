@@ -45,6 +45,7 @@
     pkgs.lazydocker
     pkgs.nixfmt-rfc-style
     pkgs.nixd
+    pkgs.btop
 
     pkgs.gcc
     pkgs.gnumake

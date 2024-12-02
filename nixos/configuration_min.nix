@@ -84,6 +84,16 @@
     isNormalUser = true;
     description = "julien";
     extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "dialout"
+      "tty"
+    ];
     packages = with pkgs; [
     #  thunderbird
     ];
@@ -115,6 +125,7 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
+  services.flatpak.enable = true;
 
   # List services that you want to enable:
 
