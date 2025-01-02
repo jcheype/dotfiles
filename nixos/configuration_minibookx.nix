@@ -7,7 +7,7 @@
 {
   imports = [
     # Include the results of the hardware scan.
-    ./hardware-configuration.nix
+    /etc/nixos/hardware-configuration.nix
   ];
 
   nix.settings.experimental-features = [
@@ -59,7 +59,10 @@
     layout = "us";
     variant = "";
   };
-
+  services.udev.packages = with pkgs; [
+    vial
+    via
+  ];
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -110,11 +113,13 @@
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
     neovim
+    stow
     openssh
     git
     home-manager
     zsh
     gnomeExtensions.screen-rotate
+    vial
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -131,6 +136,10 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+  services.logind = {
+    extraConfig = "HandlePowerKey=suspend";
+    lidSwitch = "hibernate";
+  };
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
