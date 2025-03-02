@@ -28,6 +28,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.firewall.enable = false;
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
@@ -59,10 +60,10 @@
     layout = "us";
     variant = "";
   };
-  services.udev.packages = with pkgs; [
-    vial
-    via
-  ];
+  services.udev.packages =
+    with pkgs;
+    [
+    ];
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -119,7 +120,6 @@
     home-manager
     zsh
     gnomeExtensions.screen-rotate
-    vial
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
