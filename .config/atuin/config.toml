@@ -1,3 +1,5 @@
 sync_address = "https://atuin.home.jcheype.com"
 sync_frequency = "0"
 
+[sync]
+records = true
