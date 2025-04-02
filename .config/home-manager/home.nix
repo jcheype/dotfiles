@@ -53,6 +53,7 @@
     pkgs.gnumake
     pkgs.lua-language-server
     pkgs.typescript-language-server
+    pkgs.vscode-langservers-extracted
 
     pkgs.google-chrome
     pkgs.bruno
