@@ -48,6 +48,7 @@
     pkgs.btop
     pkgs.yazi
     pkgs.atuin
+    pkgs.pik
 
     pkgs.gcc
     pkgs.gnumake
