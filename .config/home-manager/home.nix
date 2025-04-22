@@ -39,7 +39,6 @@
     pkgs.eza
     pkgs.bat
     pkgs.fd
-    pkgs.mise
     pkgs.tmux
     pkgs.direnv
     pkgs.lazydocker
@@ -55,9 +54,10 @@
     pkgs.lua-language-server
     pkgs.typescript-language-server
     pkgs.vscode-langservers-extracted
+    pkgs.nodejs
 
     pkgs.google-chrome
-    pkgs.bruno
+    #pkgs.bruno
     pkgs.vscode
 
     pkgs.zig

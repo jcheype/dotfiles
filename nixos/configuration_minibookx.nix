@@ -28,6 +28,11 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
+  networking.extraHosts =
+    ''
+      127.0.0.3 mongo-master mongo-slave mongo-arbiter
+    '';
+
   # Enable networking
   networking.networkmanager.enable = true;
   networking.firewall.enable = false;
@@ -134,7 +139,14 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-  services.flatpak.enable = true;
+  #services.flatpak.enable = true;
+
+  services.syncthing = {
+    enable = true;
+    openDefaultPorts = true;
+    user = "julien";
+    dataDir = "/home/julien";
+  };
 
   # List services that you want to enable:
 
