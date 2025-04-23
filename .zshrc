@@ -97,7 +97,7 @@ eval "$(zoxide init zsh)"
 alias cd="z"
 
 
-jjsync(){
+jjsynca(){
 	#set -x
 	jj git fetch && jj rebase -s "all:roots($1..@)" -d $1
 	#set +x

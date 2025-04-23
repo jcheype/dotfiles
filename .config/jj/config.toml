@@ -8,3 +8,6 @@ default-command = "log"
 [revsets]
 log = "::@"
 
+[aliases]
+sync = ['git', 'fetch', '--all-remotes']
+evolve = ['rebase', '--skip-emptied', '-d']
