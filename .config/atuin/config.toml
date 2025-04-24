@@ -3,3 +3,4 @@ sync_frequency = "0"
 
 [sync]
 records = true
+frequency = "0"

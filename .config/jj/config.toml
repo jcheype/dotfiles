@@ -11,3 +11,7 @@ log = "::@"
 [aliases]
 sync = ['git', 'fetch', '--all-remotes']
 evolve = ['rebase', '--skip-emptied', '-d']
+xl = ['log', '-r', 'all()']
+
+[git]
+push-bookmark-prefix = "jcheype/push-"
