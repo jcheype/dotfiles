@@ -1,21 +1,6 @@
 return {
-  "saghen/blink.cmp",
-  dependencies = {
-    {
-      "giuxtaposition/blink-cmp-copilot",
-    },
-  },
+  "zbirenbaum/copilot.lua",
   opts = {
-    sources = {
-      default = { "lsp", "path", "snippets", "buffer", "copilot" },
-      providers = {
-        copilot = {
-          name = "copilot",
-          module = "blink-cmp-copilot",
-          score_offset = 0,
-          async = true,
-        },
-      },
-    },
-  },
+    copilot_node_command = vim.fn.expand("$NODE_DEFAULT"),
+  }
 }

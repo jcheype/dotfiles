@@ -91,6 +91,8 @@ export BAT_THEME=tokyonight_night
 
 alias l="eza --color=always --long --git --icons=always"
 
+export NODE_DEFAULT="$(which node)"
+
 # ---- Zoxide (better cd) ----
 eval "$(zoxide init zsh)"
 
@@ -108,8 +110,17 @@ jjpa() {
 	jj git push -r "mine() & bookmarks() & $1::" --allow-new
 	#set +x
 }
-jjspa(){
-  jjsync $1 && jjpa $1
+
+jjsr(){
+  jj sync && jj evolve $1
+}
+
+envrc(){
+  cat >> .envrc << EOF
+if command -v nix-shell &>/dev/null; then
+  use flake "git+ssh://git@github.com/jcheype/flake-templates.git?ref=main&dir=$1"
+fi
+EOF
 }
 
 
