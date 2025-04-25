@@ -41,7 +41,6 @@
     pkgs.fd
     pkgs.tmux
     pkgs.direnv
-    pkgs.nix-direnv
     pkgs.lazydocker
     pkgs.nixfmt-rfc-style
     pkgs.nixd
@@ -103,6 +102,7 @@
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
+
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

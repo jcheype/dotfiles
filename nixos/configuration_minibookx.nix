@@ -157,6 +157,9 @@
     extraConfig = "HandlePowerKey=suspend";
     lidSwitch = "hibernate";
   };
+
+  services.lorri.enable = true;
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];

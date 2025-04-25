@@ -1,6 +1,7 @@
 sync_address = "https://atuin.home.jcheype.com"
-sync_frequency = "0"
+sync_frequency = "10s"
+inline_height = 20
+# style = "compact"
 
 [sync]
 records = true
-frequency = "0"
