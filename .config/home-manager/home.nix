@@ -41,6 +41,7 @@
     pkgs.fd
     pkgs.tmux
     pkgs.direnv
+    pkgs.nix-direnv
     pkgs.lazydocker
     pkgs.nixfmt-rfc-style
     pkgs.nixd
