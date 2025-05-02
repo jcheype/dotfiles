@@ -48,6 +48,11 @@
     pkgs.yazi
     pkgs.atuin
     pkgs.pik
+    pkgs.k9s
+    pkgs.azure-cli
+    pkgs.kubelogin
+    pkgs.kubectx
+    pkgs.kubectl
 
     pkgs.gcc
     pkgs.gnumake
