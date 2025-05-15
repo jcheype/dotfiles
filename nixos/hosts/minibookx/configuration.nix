@@ -7,7 +7,8 @@
 {
   imports = [
     # Include the results of the hardware scan.
-    /etc/nixos/hardware-configuration.nix
+    ./hardware-configuration.nix
+    ../../modules/user/main-user.nix
   ];
 
   nix.package = pkgs.lix;
@@ -75,7 +76,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -93,26 +94,17 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.julien = {
-    isNormalUser = true;
-    description = "julien";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-      "dialout"
-      "tty"
-      "docker"
-    ];
-    packages = with pkgs; [
-      #  thunderbird
-    ];
-    shell = pkgs.zsh;
+
+  main-user.enable = true;
+  main-user.username = "julien";
+
+
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;
+    xwayland.enable = true;
   };
-
-  # Install firefox.
-  programs.firefox.enable = true;
-
+  
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -123,6 +115,7 @@
   environment.systemPackages = with pkgs; [
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
+    kitty
     neovim
     stow
     openssh
