@@ -2,7 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   imports = [
@@ -21,16 +26,8 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.hostName = "minibook";
-  # networking.interfaces.enp0s20f0u3u1c2.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
 
-
+  networking.hostName = "x1carbon"; # Define your hostname.
   #networking.hostName = "nixos-laptop"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -38,10 +35,9 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  networking.extraHosts =
-    ''
-      127.0.0.3 mongo-master mongo-slave mongo-arbiter
-    '';
+  networking.extraHosts = ''
+    127.0.0.3 mongo-master mongo-slave mongo-arbiter
+  '';
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -77,10 +73,8 @@
     layout = "us";
     variant = "";
   };
-  services.udev.packages =
-    with pkgs;
-    [
-    ];
+  services.udev.packages = with pkgs; [
+  ];
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -103,17 +97,15 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-
   main-user.enable = true;
   main-user.username = "julien";
-
 
   programs.hyprland = {
     enable = true;
     withUWSM = true;
     xwayland.enable = true;
   };
-  
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -133,14 +125,20 @@
     zsh
     gnomeExtensions.screen-rotate
     waybar
+    hyprpaper
+    hyprshot
+    hyprlock
+    hyprpicker
     tofi
     lm_sensors
     kitty
     pavucontrol
     bluetuith
-    hyprpaper
+    wf-recorder
+    slurp
+    brightnessctl
+    swaynotificationcenter
   ];
-
 
   # home-manager = {
   #   extraSpecialArgs = { inherit inputs; };
@@ -176,6 +174,9 @@
   };
 
   services.lorri.enable = true;
+
+  # fprintd
+  # services.fprintd.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

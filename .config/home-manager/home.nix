@@ -59,6 +59,8 @@
     pkgs.lua-language-server
     pkgs.typescript-language-server
     pkgs.vscode-langservers-extracted
+    pkgs.nixpkgs-fmt
+    pkgs.nixd
     pkgs.nodejs
 
     pkgs.google-chrome
@@ -72,6 +74,7 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
+
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.

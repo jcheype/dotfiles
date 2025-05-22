@@ -24,7 +24,7 @@
       pkgs.nerd-fonts.droid-sans-mono
       pkgs.wl-clipboard
       pkgs.steam-run
-      inputs.ghostty.packages.${pkgs.system}.default
+      # inputs.ghostty.packages.${pkgs.system}.default
 
   ];
 # fonts.packages = [ ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);

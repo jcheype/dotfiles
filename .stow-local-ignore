@@ -4,3 +4,4 @@ nixos
 arch
 ./home-manager
 vial-corne.vil
+./nix-darwin-config
