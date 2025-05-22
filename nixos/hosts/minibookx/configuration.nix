@@ -115,6 +115,7 @@
   environment.systemPackages = with pkgs; [
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
+    pulseaudio
     home-manager
     neovim
     stow
@@ -122,7 +123,15 @@
     git
     zsh
     gnomeExtensions.screen-rotate
+    waybar
+    tofi
+    lm_sensors
+    kitty
+    pavucontrol
+    bluetuith
+    hyprpaper
   ];
+
 
   # home-manager = {
   #   extraSpecialArgs = { inherit inputs; };
