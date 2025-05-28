@@ -8,18 +8,21 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-    catppuccin.url = "github:catppuccin/nix";
-
+    nixCats = {
+      url = "github:BirdeeHub/nixCats-nvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     {
       self,
       nixpkgs,
-      catppuccin,
+      nvf,
       ...
     }@inputs:
     {
@@ -39,12 +42,10 @@
             home-manager.users.julien = {
 
               imports = [
+                nvf.homeManagerModules.default # <- this imports the home-manager module that provides the options
                 ../.config/home-manager/linux.nix
                 ../.config/home-manager/home.nix
-                catppuccin.homeModules.catppuccin
               ];
-              catppuccin.flavor = "mocha";
-              catppuccin.enable = true;
             };
           }
         ];
@@ -61,15 +62,10 @@
             home-manager.users.julien = {
 
               imports = [
+                nvf.homeManagerModules.default # <- this imports the home-manager module that provides the options
                 ../.config/home-manager/linux.nix
                 ../.config/home-manager/home.nix
-                catppuccin.homeModules.catppuccin
               ];
-              catppuccin.flavor = "mocha";
-              catppuccin.enable = true;
-              gtk = {
-                enable = true;
-              };
             };
           }
         ];

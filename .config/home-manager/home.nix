@@ -1,5 +1,9 @@
-{ config, pkgs, ... }:
-
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -18,63 +22,52 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
 
-  home.packages = [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
+  home.packages = with pkgs; [
+    neovim
+    git
+    jujutsu
+    zsh
+    zoxide
+    stow
+    ripgrep
+    starship
+    fzf
+    eza
+    bat
+    fd
+    tmux
+    lazydocker
+    nixd
+    btop
+    yazi
+    atuin
+    pik
 
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    pkgs.neovim
-    pkgs.git
-    pkgs.jujutsu
-    pkgs.zsh
-    pkgs.zoxide
-    pkgs.stow
-    pkgs.ripgrep
-    pkgs.starship
-    pkgs.fzf
-    pkgs.eza
-    pkgs.bat
-    pkgs.fd
-    pkgs.tmux
-    pkgs.direnv
-    pkgs.lazydocker
-    pkgs.nixfmt-rfc-style
-    pkgs.nixd
-    pkgs.btop
-    pkgs.yazi
-    pkgs.atuin
-    pkgs.pik
-    pkgs.k9s
-    pkgs.azure-cli
-    pkgs.kubelogin
-    pkgs.kubectx
-    pkgs.kubectl
+    k9s
+    azure-cli
+    kubelogin
+    kubectx
+    kubectl
 
-    pkgs.gcc
-    pkgs.gnumake
-    pkgs.lua-language-server
-    pkgs.typescript-language-server
-    pkgs.vscode-langservers-extracted
-    pkgs.nixpkgs-fmt
-    pkgs.nixd
-    pkgs.nodejs
+    gcc
+    gnumake
 
-    pkgs.google-chrome
-    pkgs.vscode
+    lua-language-server
+    typescript-language-server
+    vscode-langservers-extracted
 
+    nixpkgs-fmt
+    nixd
 
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
+    nodejs
+
+    google-chrome
+    vscode
   ];
 
+  imports = [
+    ./neovim
+  ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -111,7 +104,71 @@
     # EDITOR = "emacs";
   };
 
-
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+  programs = {
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
+
+  };
+  # programs.nvf = {
+  #   enable = false;
+  #   # your settings need to go into the settings attribute set
+  #   # most settings are documented in the appendix
+  #   settings = {
+  #     vim = {
+  #       binds.whichKey.enable = true;
+  #       lsp = {
+  #         enable = true;
+  #         formatOnSave = true;
+  #       };
+  #       languages = {
+  #         enableFormat = true;
+  #         enableTreesitter = true;
+  #         html.enable = true;
+  #         lua.enable = true;
+  #         nix.enable = true;
+  #         python.enable = true;
+  #         rust.enable = true;
+  #         ts.enable = true;
+  #         ts.format.type = "biome";
+  #       };
+  #       vimAlias = true;
+  #       theme = {
+  #         enable = true;
+  #         name = "gruvbox";
+  #         style = "dark";
+  #       };
+  #       statusline.lualine.enable = true;
+  #       telescope = {
+  #         enable = true;
+  #         mappings = {
+  #           findFiles = lib.nvim.bind.smkMappingOption "Find files [Telescope]" "<leader> ";
+  #           # liveGrep = mkMappingOption "Live grep [Telescope]" "<leader>sg";
+  #         };
+  #       };
+  #
+  #       autocomplete.blink-cmp.enable = true;
+  #       mini = {
+  #         ai.enable = true;
+  #         basics.enable = true;
+  #         pairs.enable = true;
+  #         surround.enable = true;
+  #       };
+  #       utility.oil-nvim.enable = true;
+  #       keymaps = [
+  #         {
+  #           key = "-";
+  #           mode = [ "n" ];
+  #           action = ":Oil<CR>";
+  #           silent = true;
+  #           desc = "Goto Oil";
+  #         }
+  #
+  #       ];
+  #     };
+  #   };
+  # };
 }

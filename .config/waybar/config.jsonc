@@ -200,10 +200,10 @@
     "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
     "tooltip": true,
     "format-icons": {
-      "default": "<span color='#00FF7F'> </span>",
-      "performance": "<span color='#FF4040'> </span> Performance",
-      "balanced": "<span color='#00BFFF'> </span> Balanced",
-      "power-saver": "<span color='#00FF7F'> 󰌪</span> Power-saver"
+      "default": "<span color='#00FF7F'>  </span>",
+      "performance": "<span color='#FF4040'>  </span> Performance",
+      "balanced": "<span color='#00BFFF'>  </span> Balanced",
+      "power-saver": "<span color='#00FF7F'> 󰌪 </span> Power-saver"
     }
   }
 }

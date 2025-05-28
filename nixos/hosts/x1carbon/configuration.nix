@@ -71,7 +71,7 @@
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
-    variant = "";
+    variant = "altgr-intl";
   };
   services.udev.packages = with pkgs; [
   ];
@@ -123,14 +123,15 @@
     openssh
     git
     zsh
-    gnomeExtensions.screen-rotate
+
     waybar
     hyprpaper
     hyprshot
     hyprlock
     hyprpicker
+    hypridle
+    
     tofi
-    lm_sensors
     kitty
     pavucontrol
     bluetuith
@@ -138,8 +139,13 @@
     slurp
     brightnessctl
     swaynotificationcenter
+    fprintd
   ];
 
+  services.fprintd = {
+    enable = true;
+    package = pkgs.fprintd;
+  };
   # home-manager = {
   #   extraSpecialArgs = { inherit inputs; };
   #   users = {
@@ -170,10 +176,11 @@
 
   services.logind = {
     extraConfig = "HandlePowerKey=suspend";
-    lidSwitch = "hibernate";
+    lidSwitch = "suspend";
   };
 
-  services.lorri.enable = true;
+  # services.lorri.enable = true;
+  # programs.direnv.enable = true;
 
   # fprintd
   # services.fprintd.enable = true;
