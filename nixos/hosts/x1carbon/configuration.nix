@@ -123,6 +123,7 @@
     openssh
     git
     zsh
+    appimage-run
 
     waybar
     hyprpaper
@@ -156,6 +157,11 @@
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.zsh.enable = true;
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
+
   # programs.gnupg.agent = {
   #   enable = true;
   #   enableSSHSupport = true;
@@ -175,7 +181,7 @@
   services.openssh.enable = true;
 
   services.logind = {
-    extraConfig = "HandlePowerKey=suspend";
+      extraConfig = "HandlePowerKey=suspend";
     lidSwitch = "suspend";
   };
 

@@ -95,18 +95,18 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = 'Scroll Up' })
 vim.keymap.set("n", "n", "nzzzv", { desc = 'Next Search Result' })
 vim.keymap.set("n", "N", "Nzzzv", { desc = 'Previous Search Result' })
 
-vim.keymap.set("n", "<leader><leader>[", "<cmd>bprev<CR>", { desc = 'Previous buffer' })
-vim.keymap.set("n", "<leader><leader>]", "<cmd>bnext<CR>", { desc = 'Next buffer' })
-vim.keymap.set("n", "<leader><leader>l", "<cmd>b#<CR>", { desc = 'Last buffer' })
-vim.keymap.set("n", "<leader><leader>d", "<cmd>bdelete<CR>", { desc = 'delete buffer' })
+-- vim.keymap.set("n", "<leader><leader>[", "<cmd>bprev<CR>", { desc = 'Previous buffer' })
+-- vim.keymap.set("n", "<leader><leader>]", "<cmd>bnext<CR>", { desc = 'Next buffer' })
+-- vim.keymap.set("n", "<leader><leader>l", "<cmd>b#<CR>", { desc = 'Last buffer' })
+-- vim.keymap.set("n", "<leader><leader>d", "<cmd>bdelete<CR>", { desc = 'delete buffer' })
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+vim.keymap.set('n', '<leader>cd', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+vim.keymap.set('n', '<leader>cD', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- kickstart.nvim starts you with this.
 -- But it constantly clobbers your system clipboard whenever you delete anything.
@@ -139,13 +139,13 @@ require("snacks").setup({
   gitbrowse = {},
   scope = {},
 })
-vim.keymap.set("n", "-", function() Snacks.explorer.open() end, { desc = 'Snacks Explorer' })
+vim.keymap.set("n", "<leader>e", function() Snacks.explorer.open() end, { desc = 'Snacks Explorer' })
 vim.keymap.set("n", "<c-\\>", function() Snacks.terminal.open() end, { desc = 'Snacks Terminal' })
 vim.keymap.set("n", "<leader>_", function() Snacks.lazygit.open() end, { desc = 'Snacks LazyGit' })
 vim.keymap.set('n', "<leader>sf", function() Snacks.picker.smart() end, { desc = "Smart Find Files" })
-vim.keymap.set('n', "<leader><leader>s", function() Snacks.picker.buffers() end, { desc = "Search Buffers" })
+-- vim.keymap.set('n', "<leader><leader>s", function() Snacks.picker.buffers() end, { desc = "Search Buffers" })
 -- find
-vim.keymap.set('n', "<leader>ff", function() Snacks.picker.files() end, { desc = "Find Files" })
+vim.keymap.set('n', "<leader><leader>", function() Snacks.picker.files() end, { desc = "Find Files" })
 vim.keymap.set('n', "<leader>fg", function() Snacks.picker.git_files() end, { desc = "Find Git Files" })
 -- Grep
 vim.keymap.set('n', "<leader>sb", function() Snacks.picker.lines() end, { desc = "Buffer Lines" })
@@ -165,7 +165,55 @@ vim.keymap.set('n', "<leader>sM", function() Snacks.picker.man() end, { desc = "
 vim.keymap.set('n', "<leader>sq", function() Snacks.picker.qflist() end, { desc = "Quickfix List" })
 vim.keymap.set('n', "<leader>sR", function() Snacks.picker.resume() end, { desc = "Resume" })
 vim.keymap.set('n', "<leader>su", function() Snacks.picker.undo() end, { desc = "Undo History" })
+vim.keymap.set('n', "<leader>gs", function() Snacks.picker.git_status() end, { desc = "Git Status" })
+vim.keymap.set('n', "<leader>gd", function() Snacks.picker.git_diff() end, { desc = "Git Diff" })
+
+vim.keymap.del("n", "gri")
+vim.keymap.del("n", "gra")
+vim.keymap.del("n", "grr")
+vim.keymap.del("n", "grn")
+
+vim.diagnostic.config({
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  virtual_text = true,
+})
+
+require("oil").setup()
+vim.keymap.set("n", "-", ":Oil<CR>")
+
 require('lze').load {
+  {
+    "zbirenbaum/copilot.lua",
+    -- dep_of = { "blink-cmp-copilot" },
+    cmd = "Copilot",
+    build = ":Copilot auth",
+
+    event = "InsertEnter",
+    after = function()
+      require("copilot").setup({
+        suggestion = {
+          enabled = not vim.g.ai_cmp,
+          auto_trigger = true,
+          hide_during_completion = vim.g.ai_cmp,
+          keymap = {
+            accept = false, -- handled by nvim-cmp / blink.cmp
+            next = "<M-]>",
+            prev = "<M-[>",
+          },
+        },
+        panel = { enabled = false },
+        filetypes = {
+          markdown = true,
+          help = true,
+        },
+      })
+    end,
+  },
+  {
+    "blink-cmp-copilot",
+  },
   {
     "blink.cmp",
     enabled = nixCats('general') or false,
@@ -175,13 +223,24 @@ require('lze').load {
       require("blink.cmp").setup({
         -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
         -- See :h blink-cmp-config-keymap for configuring keymaps
-        keymap = { preset = 'default' },
+        keymap = { preset = 'super-tab' },
         appearance = {
           nerd_font_variant = 'mono'
         },
         signature = { enabled = true, },
         sources = {
-          default = { 'lsp', 'path', 'snippets', 'buffer' },
+          providers = {
+            copilot = {
+              name = "copilot",
+              module = "blink-cmp-copilot",
+              score_offset = 0,
+              async = true,
+            },
+          },
+
+          default = { 'lsp', 'path', 'snippets', 'buffer',
+            "copilot",
+          },
         },
       })
     end,
@@ -268,6 +327,19 @@ require('lze').load {
       require('mini.pairs').setup()
       require('mini.icons').setup()
       require('mini.ai').setup()
+      require('mini.surround').setup(
+        {
+          mappings = {
+            add = "gsa",            -- Add surrounding in Normal and Visual modes
+            delete = "gsd",         -- Delete surrounding
+            find = "gsf",           -- Find surrounding (to the right)
+            find_left = "gsF",      -- Find surrounding (to the left)
+            highlight = "gsh",      -- Highlight surrounding
+            replace = "gsr",        -- Replace surrounding
+            update_n_lines = "gsn", -- Update `n_lines`
+          },
+        }
+      )
     end,
   },
   {
@@ -380,12 +452,12 @@ require('lze').load {
             gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
           end, { desc = 'reset git hunk' })
           -- normal mode
-          map('n', '<leader>gs', gs.stage_hunk, { desc = 'git stage hunk' })
-          map('n', '<leader>gr', gs.reset_hunk, { desc = 'git reset hunk' })
-          map('n', '<leader>gS', gs.stage_buffer, { desc = 'git Stage buffer' })
-          map('n', '<leader>gu', gs.undo_stage_hunk, { desc = 'undo stage hunk' })
-          map('n', '<leader>gR', gs.reset_buffer, { desc = 'git Reset buffer' })
-          map('n', '<leader>gp', gs.preview_hunk, { desc = 'preview git hunk' })
+          -- map('n', '<leader>gs', gs.stage_hunk, { desc = 'git stage hunk' })
+          -- map('n', '<leader>gr', gs.reset_hunk, { desc = 'git reset hunk' })
+          -- map('n', '<leader>gS', gs.stage_buffer, { desc = 'git Stage buffer' })
+          -- map('n', '<leader>gu', gs.undo_stage_hunk, { desc = 'undo stage hunk' })
+          -- map('n', '<leader>gR', gs.reset_buffer, { desc = 'git Reset buffer' })
+          -- map('n', '<leader>gp', gs.preview_hunk, { desc = 'preview git hunk' })
           map('n', '<leader>gb', function()
             gs.blame_line { full = false }
           end, { desc = 'git blame line' })
@@ -440,17 +512,22 @@ require('lze').load {
     enabled = nixCats('general') or false,
     event = "FileType",
     after = function(plugin)
-      require('lint').linters_by_ft = {
+      local lint = require('lint')
+      lint.linters_by_ft = {
         -- NOTE: download some linters in lspsAndRuntimeDeps
         -- and configure them here
         -- markdown = {'vale',},
         -- javascript = { 'eslint' },
+        -- javascript = { 'biomejs' },
+        typescript = nixCats('ts') and { 'biomejs' } or nil,
         go = nixCats('go') and { 'golangcilint' } or nil,
       }
+      lint.linters.biomejs.cmd = "biome"
+      -- lint.linters.biomejs.stdin = true;
 
-      vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+      vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "TextChanged" }, {
         callback = function()
-          require("lint").try_lint()
+          lint.try_lint()
         end,
       })
     end,
@@ -459,34 +536,57 @@ require('lze').load {
     "conform.nvim",
     enabled = nixCats('general') or false,
     keys = {
-      { "<leader>FF", desc = "[F]ormat [F]ile" },
+      { "<leader>cf", desc = "[F]ormat [F]ile" },
     },
     -- colorscheme = "",
     after = function(plugin)
       local conform = require("conform")
 
       conform.setup({
+        format_on_save = {
+          -- These options will be passed to conform.format()
+          timeout_ms = 500,
+          lsp_format = "fallback",
+        },
+        formatters = {
+          biome = {
+            command = "biome",
+            require_cwd = true,
+          },
+          prettier = {
+            require_cwd = true,
+          },
+          prettierd = {
+            command = "prettierd",
+            require_cwd = true,
+          },
+        },
         formatters_by_ft = {
           -- NOTE: download some formatters in lspsAndRuntimeDeps
           -- and configure them here
           lua = nixCats('lua') and { "stylua" } or nil,
           go = nixCats('go') and { "gofmt", "golint" } or nil,
-          -- templ = { "templ" },
-          -- Conform will run multiple formatters sequentially
-          -- python = { "isort", "black" },
-          -- Use a sub-list to run only the first available formatter
-          -- javascript = { { "prettierd", "prettier" } },
-          typescript = nixCats('ts') and { "biome", "biome-organize-imports" } or nil,
+          typescript = nixCats('ts') and { "prettierd", "biome", stop_after_first = true } or nil,
         },
       })
 
-      vim.keymap.set({ "n", "v" }, "<leader>FF", function()
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        callback = function(args)
+          conform.format({
+            bufnr = args.buf,
+            async = false,
+            timeout_ms = 1000,
+          })
+        end,
+      })
+
+      vim.keymap.set({ "n", "v" }, "<leader>cf", function()
         conform.format({
           lsp_fallback = true,
           async = false,
           timeout_ms = 1000,
         })
-      end, { desc = "[F]ormat [F]ile" })
+      end, { desc = "[C]ode [F]ormat" })
     end,
   },
   {
@@ -794,74 +894,6 @@ require('lze').load {
           },
         },
       },
-    },
-    keys = {
-      -- {
-      --   "gD",
-      --   function()
-      --     local params = vim.lsp.util.make_position_params()
-      --     LazyVim.lsp.execute({
-      --       command = "typescript.goToSourceDefinition",
-      --       arguments = { params.textDocument.uri, params.position },
-      --       open = true,
-      --     })
-      --   end,
-      --   desc = "Goto Source Definition",
-      -- },
-      -- {
-      --   "gR",
-      --   function()
-      --     LazyVim.lsp.execute({
-      --       command = "typescript.findAllFileReferences",
-      --       arguments = { vim.uri_from_bufnr(0) },
-      --       open = true,
-      --     })
-      --   end,
-      --   desc = "File References",
-      -- },
-      {
-        "<leader>co",
-        -- LazyVim.lsp.action["source.organizeImports"],
-        function()
-          local params = {
-            command = "source.organizeImports",
-            arguments = { vim.api.nvim_buf_get_name(0) },
-            title = "",
-          }
-
-          local clients = vim.lsp.get_clients { name = "vtsls" }
-          if #clients == 0 then
-            vim.notify("No vtsls client found", vim.log.levels.ERROR)
-            return
-          end
-          local client = clients[1]
-          client:exec_cmd(params)
-          vim.notify("Imports sorted", vim.log.levels.INFO)
-        end,
-        desc = "Organize Imports",
-      },
-      -- {
-      --   "<leader>cM",
-      --   LazyVim.lsp.action["source.addMissingImports.ts"],
-      --   desc = "Add missing imports",
-      -- },
-      -- {
-      --   "<leader>cu",
-      --   LazyVim.lsp.action["source.removeUnused.ts"],
-      --   desc = "Remove unused imports",
-      -- },
-      -- {
-      --   "<leader>cD",
-      --   LazyVim.lsp.action["source.fixAll.ts"],
-      --   desc = "Fix all diagnostics",
-      -- },
-      -- {
-      --   "<leader>cV",
-      --   function()
-      --     LazyVim.lsp.execute({ command = "typescript.selectTypeScriptVersion" })
-      --   end,
-      --   desc = "Select TS workspace version",
-      -- },
     },
   },
   -- { "nvim-lua/plenary.nvim" },

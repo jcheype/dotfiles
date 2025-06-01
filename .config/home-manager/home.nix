@@ -56,8 +56,8 @@
     typescript-language-server
     vscode-langservers-extracted
 
-    nixpkgs-fmt
-    nixd
+    # alejandra
+    # nixd
 
     nodejs
 

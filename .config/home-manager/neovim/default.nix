@@ -78,6 +78,7 @@ in
               vtsls
               vscode-js-debug
               biome
+              prettierd
             ];
           };
 
@@ -90,6 +91,9 @@ in
               lzextras
               snacks-nvim
               onedark-nvim
+              oil-nvim
+              copilot-lua
+              blink-cmp-copilot
             ];
           };
 
@@ -133,6 +137,9 @@ in
             # test = {
             #   CATTESTVAR = "It worked!";
             # };
+            ts = {
+              BIOME_BINARY = pkgs.biome;
+            };
           };
 
           # categories of the function you would have passed to withPackages
