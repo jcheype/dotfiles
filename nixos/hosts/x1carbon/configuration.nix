@@ -147,6 +147,12 @@
     enable = true;
     package = pkgs.fprintd;
   };
+
+ services.avahi = {
+  enable = true;
+  nssmdns4 = true;
+  openFirewall = true;
+};
   # home-manager = {
   #   extraSpecialArgs = { inherit inputs; };
   #   users = {
