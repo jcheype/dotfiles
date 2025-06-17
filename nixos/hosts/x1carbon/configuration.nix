@@ -162,6 +162,10 @@
     binfmt = true;
   };
 
+  programs.steam = {
+    enable = true;
+    extraCompatPackages = [ pkgs.proton-ge-bin];
+};
   # programs.gnupg.agent = {
   #   enable = true;
   #   enableSSHSupport = true;
