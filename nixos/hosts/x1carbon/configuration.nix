@@ -124,6 +124,7 @@
     git
     zsh
     appimage-run
+    opencode
 
     waybar
     hyprpaper
@@ -153,6 +154,8 @@
   nssmdns4 = true;
   openFirewall = true;
 };
+
+services.printing.drivers = [ pkgs.gutenprint pkgs.gutenprintBin pkgs.brlaser pkgs.brgenml1lpr pkgs.brgenml1cupswrapper  ];
   # home-manager = {
   #   extraSpecialArgs = { inherit inputs; };
   #   users = {
