@@ -14,4 +14,4 @@ evolve = ['rebase', '--skip-emptied', '-d']
 xl = ['log', '-r', 'all()']
 
 [git]
-push-bookmark-prefix = "jcheype/push-"
+templates.git_push_bookmark = "jcheype/push-"

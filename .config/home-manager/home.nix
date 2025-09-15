@@ -44,7 +44,7 @@
     pik
 
     k9s
-    azure-cli
+    # azure-cli
     kubelogin
     kubectx
     kubectl

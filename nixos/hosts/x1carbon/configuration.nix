@@ -100,6 +100,10 @@
   main-user.enable = true;
   main-user.username = "julien";
 
+  programs.niri = {
+    enable = true;
+  };
+
   programs.hyprland = {
     enable = true;
     withUWSM = true;
@@ -193,11 +197,11 @@ services.printing.drivers = [ pkgs.gutenprint pkgs.gutenprintBin pkgs.brlaser pk
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-  services.logind = {
-      extraConfig = "HandlePowerKey=suspend";
-    lidSwitch = "suspend";
-  };
-
+  # services.logind = {
+  #     extraConfig = "HandlePowerKey=suspend";
+  #   lidSwitch = "suspend";
+  # };
+  #
   # services.lorri.enable = true;
   # programs.direnv.enable = true;
 
